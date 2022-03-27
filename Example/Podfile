@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'SSDView_Example' do
+  pod 'SSDView', :path => '../'
+
+  target 'SSDView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
