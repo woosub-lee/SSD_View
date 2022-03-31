@@ -1,0 +1,6 @@
+framework module SSDView {
+  umbrella header "SSDView-umbrella.h"
+
+  export *
+  module * { export * }
+}
