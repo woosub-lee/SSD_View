@@ -40,12 +40,18 @@ public class SDView: UITextField {
 }
 
 extension SDView {
+    /**
+     This method set the view to don't prevent screenshots or screen records.
+     */
     @discardableResult
     public func allow() -> Self {
         self.isSecureTextEntry = false
         return self
     }
     
+    /**
+     This method set the view to prevent screenshots or screen records.
+     */
     @discardableResult
     public func disAllow() -> Self {
         self.isSecureTextEntry = true
