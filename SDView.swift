@@ -11,6 +11,9 @@ public class SDView: UITextField {
     
     private var protector: UIView?
     
+    private var normalView: UIView?
+    private var detectView: UIView?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initSDView()
@@ -55,6 +58,53 @@ extension SDView {
     @discardableResult
     public func disAllow() -> Self {
         self.isSecureTextEntry = true
+        return self
+    }
+    
+    /**
+     The method which is displayed view when it didn't detected Screenshot or Capture.
+         
+     - parameter whenItIsNormal: the view which displayed when It didn't detect Screenshot or Capture
+         
+     - important: If you set displayed view when detected Screenshot or Record, Do not insert normal view with non 1.0 Alpha value
+     */
+    @discardableResult
+    public func setView(whenItIsNormal view: UIView) -> Self {
+        self.normalView = view
+        
+        guard let protector = protector else { return self }
+        guard let normalView = normalView else { return self }
+        protector.addSubview(normalView)
+        
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint.init(item: protector, attribute: .leading, relatedBy: .equal, toItem: normalView, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: protector, attribute: .trailing, relatedBy: .equal, toItem: normalView, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: protector, attribute: .top, relatedBy: .equal, toItem: normalView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: protector, attribute: .bottom, relatedBy: .equal, toItem: normalView, attribute: .bottom, multiplier: 1, constant: 0)
+        ])
+        return self
+    }
+    
+    /**
+     The method which is displayed view when it detected Screenshot or Capture.
+         
+     - parameter whenItIsDetected: the view which displayed when It detect Screenshot or Capture
+     */
+    @discardableResult
+    public func setView(whenItIsDetected view: UIView) -> Self {
+        self.detectView = view
+        
+        guard let protector = protector else { return self }
+        guard let detectView = detectView else { return self }
+        self.addSubview(detectView)
+        self.bringSubviewToFront(protector)
+        
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint.init(item: detectView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: detectView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: detectView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: detectView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        ])
         return self
     }
 }
