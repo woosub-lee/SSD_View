@@ -14,6 +14,10 @@ public class SDView: UITextField {
     private var normalView: UIView?
     private var detectView: UIView?
     
+    init() {
+        super.init(frame: .zero)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initSDView()
