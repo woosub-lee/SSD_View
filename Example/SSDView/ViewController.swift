@@ -61,13 +61,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        let blueView: UIView = {
-            let view = UIView()
-            view.backgroundColor = .blue
-            return view
-        }()
         
         sdView
             .setView(whenItIsNormal: importantPrivacyView)
