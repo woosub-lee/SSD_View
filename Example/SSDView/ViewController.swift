@@ -7,12 +7,32 @@
 //
 
 import UIKit
+import Pods_SSDView_Example
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet var sdView: SDView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let redView: UIView = {
+            let view = UIView()
+            view.backgroundColor = .red
+            return view
+        }()
+        
+        let blueView: UIView = {
+            let view = UIView()
+            view.backgroundColor = .blue
+            return view
+        }()
+        
+        sdView
+            .setView(whenItIsNormal: blueView)
+            .setView(whenItIsDetected: redView)
+            .disAllow()
     }
 
     override func didReceiveMemoryWarning() {

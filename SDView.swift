@@ -27,14 +27,24 @@ public class SDView: UITextField {
     private func initSDView() {
         // textfield's subview is UITextLayoutCanvasView
         // UITextLayoutCanvasView is hidden when excute screenshot or record. ( isSecureTextEntry == true )
-        self.protector = self.subviews.first
+        self.protector = findProtector()
         self.clearView()
         self.preventInteractionAsTextfield()
+    }
+    
+    private func findProtector() -> UIView? {
+        for subview in self.subviews {
+            if subview.frame == CGRect(x: 0, y: 0, width: 0, height: 0) {
+                return subview
+            }
+        }
+        return nil
     }
     
     private func clearView() {
         self.borderStyle = .none
         self.backgroundColor = .clear
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func preventInteractionAsTextfield() {
@@ -71,7 +81,7 @@ extension SDView {
     @discardableResult
     public func setView(whenItIsNormal view: UIView) -> Self {
         self.normalView = view
-        
+        self.normalView?.translatesAutoresizingMaskIntoConstraints = false
         guard let protector = protector else { return self }
         guard let normalView = normalView else { return self }
         protector.addSubview(normalView)
@@ -93,6 +103,7 @@ extension SDView {
     @discardableResult
     public func setView(whenItIsDetected view: UIView) -> Self {
         self.detectView = view
+        self.detectView?.translatesAutoresizingMaskIntoConstraints = false
         
         guard let protector = protector else { return self }
         guard let detectView = detectView else { return self }
@@ -100,10 +111,10 @@ extension SDView {
         self.bringSubviewToFront(protector)
         
         NSLayoutConstraint.activate([
-            NSLayoutConstraint.init(item: detectView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
-            NSLayoutConstraint.init(item: detectView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
-            NSLayoutConstraint.init(item: detectView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint.init(item: detectView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+            NSLayoutConstraint.init(item: self, attribute: .leading, relatedBy: .equal, toItem: detectView, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: self, attribute: .trailing, relatedBy: .equal, toItem: detectView, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: self, attribute: .top, relatedBy: .equal, toItem: detectView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint.init(item: self, attribute: .bottom, relatedBy: .equal, toItem: detectView, attribute: .bottom, multiplier: 1, constant: 0)
         ])
         return self
     }
