@@ -16,7 +16,6 @@ class ViewController: UIViewController {
     let importantPrivacyView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
