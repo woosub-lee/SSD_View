@@ -20,14 +20,28 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4ii-6T-Qn2" customClass="SDView" customModule="Pods_SSDView_Example">
-                                <rect key="frame" x="30" y="30" width="315" height="607"/>
+                                <rect key="frame" x="30" y="84" width="315" height="553"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DLr-uC-Jq3">
+                                <rect key="frame" x="20" y="10" width="335" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="bvN-KK-K3S"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Go to SwiftUI Example"/>
+                                <connections>
+                                    <action selector="goToSwiftUIExampleAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Cae-2A-Lx2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4ii-6T-Qn2" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="30" id="EH6-tu-CJk"/>
+                            <constraint firstItem="4ii-6T-Qn2" firstAttribute="top" secondItem="DLr-uC-Jq3" secondAttribute="bottom" constant="30" id="AK5-Uw-yav"/>
+                            <constraint firstAttribute="trailing" secondItem="DLr-uC-Jq3" secondAttribute="trailing" constant="20" id="Jta-Fp-OHK"/>
+                            <constraint firstItem="DLr-uC-Jq3" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="10" id="LuH-ir-NGK"/>
+                            <constraint firstItem="DLr-uC-Jq3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="eMe-AN-nq5"/>
                             <constraint firstItem="4ii-6T-Qn2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="30" id="fjy-h8-cif"/>
                             <constraint firstAttribute="trailing" secondItem="4ii-6T-Qn2" secondAttribute="trailing" constant="30" id="iYz-bf-vHc"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="4ii-6T-Qn2" secondAttribute="bottom" constant="30" id="vc7-PR-Vf6"/>

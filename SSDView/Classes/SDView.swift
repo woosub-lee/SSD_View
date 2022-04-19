@@ -10,7 +10,6 @@ import UIKit
 public class SDView: UITextField {
     
     private var protector: UIView?
-    
     private var normalView: UIView?
     private var detectView: UIView?
     

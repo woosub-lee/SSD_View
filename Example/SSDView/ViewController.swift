@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 import Pods_SSDView_Example
 
 class ViewController: UIViewController {
@@ -16,7 +17,6 @@ class ViewController: UIViewController {
     let importantPrivacyView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
@@ -68,10 +68,12 @@ class ViewController: UIViewController {
             .disAllow()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func goToSwiftUIExampleAction(_ sender: UIButton) {
+        let host = UIHostingController(rootView: ScreenshotDisallowExampleView())
+        host.modalPresentationStyle = .fullScreen
+        self.present(host, animated: true)
     }
-
+    
 }
 
