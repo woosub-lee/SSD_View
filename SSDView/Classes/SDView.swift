@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+/// Screenshot Detection View
+///
+/// Use this view when prevent view from user's screenshot or screen record
 public class SDView: UITextField {
     
     private var protector: UIView?
@@ -28,7 +32,7 @@ public class SDView: UITextField {
     }
     
     private func initSDView() {
-        // textfield's subview is UITextLayoutCanvasView
+        // textfield's subview is UITextLayoutCanvasView <- It's a private API
         // UITextLayoutCanvasView is hidden when excute screenshot or record. ( isSecureTextEntry == true )
         self.protector = findProtector()
         self.clearView()
@@ -80,6 +84,8 @@ extension SDView {
      - parameter whenItIsNormal: the view which displayed when It didn't detect Screenshot or Capture
          
      - important: If you set displayed view when detected Screenshot or Record, Do not insert normal view with non 1.0 Alpha value
+     
+     - TODO: delete this method & combine with initalizer
      */
     @discardableResult
     public func setView(whenItIsNormal view: UIView) -> Self {
