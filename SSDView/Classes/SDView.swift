@@ -33,14 +33,19 @@ public class SDView: UITextField {
     
     private func initSDView() {
         // textfield's subview is UITextLayoutCanvasView <- It's a private API
-        // UITextLayoutCanvasView is hidden when excute screenshot or record. ( isSecureTextEntry == true )
+        // UITextLayoutCanvasView and it's subviews are not displayed when excute screenshot or record. ( isSecureTextEntry == true )
         self.protector = findProtector()
         self.clearView()
         self.preventInteractionAsTextfield()
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    /// This method find **UITextLayoutCanvasView**.
     private func findProtector() -> UIView? {
         for subview in self.subviews {
+            /// UITextLayoutCanvasView's condition.
+            /// This condition is found out by experiments.
+            /// This condition is definitely not beautiful, but I could't find other condition using public API.
             if subview.frame == CGRect(x: 0, y: 0, width: 0, height: 0) {
                 return subview
             }
@@ -51,7 +56,6 @@ public class SDView: UITextField {
     private func clearView() {
         self.borderStyle = .none
         self.backgroundColor = .clear
-        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func preventInteractionAsTextfield() {
@@ -84,8 +88,6 @@ extension SDView {
      - parameter whenItIsNormal: the view which displayed when It didn't detect Screenshot or Capture
          
      - important: If you set displayed view when detected Screenshot or Record, Do not insert normal view with non 1.0 Alpha value
-     
-     - TODO: delete this method & combine with initalizer
      */
     @discardableResult
     public func setView(whenItIsNormal view: UIView) -> Self {
